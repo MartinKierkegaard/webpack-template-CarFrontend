@@ -6,6 +6,9 @@ import { ICar } from "./Icar";
 
 
 let ContentElement: HTMLDivElement = <HTMLDivElement> document.getElementById("content");
+let GetAllCarsButton: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getAllButton");
+
+GetAllCarsButton.addEventListener('click',showAllCars)
 
 function showAllCars():void{
 
@@ -14,6 +17,15 @@ function showAllCars():void{
     {
         console.log("Er i then");
         console.log(response);
+
+        let result: string = "<ol>" 
+
+        response.data.forEach((car: ICar) => {
+            result += "<li>"+ car.model + " " +car.vendor+ " "+car.id  +"</li>"
+        });
+        result += "</ol>"
+
+        ContentElement.innerHTML= result;
         
     })
     .catch(
