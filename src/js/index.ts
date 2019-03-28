@@ -34,13 +34,13 @@ function deleteCar():void{
     //http delete request with one parameter(params) id that is set to myCarId
     axios.delete("https://webapicar20190326034339.azurewebsites.net/api/cars/"+myCarId
         )
-        .then(function (response :  AxiosResponse): void{
+        .then((response :  AxiosResponse): void => {
                 console.log("Bilen er slettet");
                 console.log("Statuskoden er :" + response.status);
                 deleteContentElement.innerHTML = "bilen er slettet";
         })
         .catch(
-            function (error:AxiosError) : void{                          
+            (error:AxiosError) : void => {                          
                 console.log(error);
                 deleteContentElement.innerHTML = "Fejl: bilen er IKKE slettet, se i console";
             });
