@@ -4,6 +4,8 @@ import axios,{
 } from "../../node_modules/axios/index"
 import { ICar } from "./Icar";
 
+//url for the rest webservice at Azure
+let carWebUrl: string = "https://webapicar20190326034339.azurewebsites.net/api/cars/";
 
 let ContentElement: HTMLDivElement = <HTMLDivElement> document.getElementById("content");
 let GetAllCarsButton: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getAllButton");
@@ -11,8 +13,39 @@ let GetAllCarsButton: HTMLButtonElement = <HTMLButtonElement> document.getElemen
 GetAllCarsButton.addEventListener('click',showAllCars);
 
 let AddCarButton: HTMLButtonElement = <HTMLButtonElement> document.getElementById("addButton");
-
 AddCarButton.addEventListener('click',addCar);
+
+let deleteCarButton: HTMLButtonElement = <HTMLButtonElement> document.getElementById("deleteButton");
+deleteCarButton.addEventListener('click',deleteCar);
+
+/**
+ * Function thats deletes a car 
+ * This function is triggered then the click event is fired from the deleteButton
+ */
+function deleteCar():void{
+
+    //finds the id for the car to delete
+    let delCarIdElement: HTMLInputElement = <HTMLInputElement> document.getElementById("deleteCarId");
+    let myCarId : number = +delCarIdElement.value;
+    
+    let deleteContentElement: HTMLDivElement = <HTMLDivElement> document.getElementById("deletecontent");
+
+    
+    //http delete request with one parameter(params) id that is set to myCarId
+    axios.delete("https://webapicar20190326034339.azurewebsites.net/api/cars/"+myCarId
+        )
+        .then(function (response :  AxiosResponse): void{
+                console.log("Bilen er slettet");
+                console.log("Statuskoden er :" + response.status);
+                deleteContentElement.innerHTML = "bilen er slettet";
+        })
+        .catch(
+            function (error:AxiosError) : void{                          
+                console.log(error);
+                deleteContentElement.innerHTML = "Fejl: bilen er IKKE slettet, se i console";
+            });
+
+}
 
 function addCar():void{
     let addModelelement: HTMLInputElement = <HTMLInputElement> document.getElementById("addModel");
