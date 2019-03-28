@@ -1,3 +1,11 @@
+# Simpel frontend som kalder en restfull webservice
+Dette projekt bruger axios til at kalde en webservice i Azure via HTTP
+
+restservicen kan også findes her på GitHub https://github.com/MartinKierkegaard/WebApiCar
+
+### Author
+Martin Kierkegaard
+
 # Webpack - TypeScript - SCSS
 this project is a beginner-friendly introduction to Webpack, Type Script and SCSS.
 This includes a simple webpack configuration including TypeScript and SCSS transporation
