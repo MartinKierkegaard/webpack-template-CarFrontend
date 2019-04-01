@@ -45,6 +45,8 @@ function deleteCar():void{
                 deleteContentElement.innerHTML = "Fejl: bilen er IKKE slettet, se i console";
             });
 
+            //https://www.typescriptlang.org/docs/handbook/functions.html
+            //se arrow functions 
 }
 
 function addCar():void{
