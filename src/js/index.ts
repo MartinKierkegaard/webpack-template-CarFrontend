@@ -35,14 +35,14 @@ function deleteCar():void{
     axios.delete("https://webapicar20190326034339.azurewebsites.net/api/cars/"+myCarId
         )
         .then((response :  AxiosResponse): void => {
-                console.log("Bilen er slettet");
-                console.log("Statuskoden er :" + response.status);
-                deleteContentElement.innerHTML = "bilen er slettet";
+                console.log("Car is deleted ");
+                console.log("Statuscode is :" + response.status);
+                deleteContentElement.innerHTML = "car is deleted";
         })
         .catch(
             (error:AxiosError) : void => {                          
                 console.log(error);
-                deleteContentElement.innerHTML = "Fejl: bilen er IKKE slettet, se i console";
+                deleteContentElement.innerHTML = "Error: the car is NOT deleted, look at the console";
             });
 
             //https://www.typescriptlang.org/docs/handbook/functions.html
@@ -62,7 +62,7 @@ function addCar():void{
                     {model:myModel,vendor:myVendor,price:myPrice})
                     .then(function (response :  AxiosResponse): void
                     {
-                        console.log("Statuskoden er :" + response.status);
+                        console.log("Statuscode is :" + response.status);
                     })
                     .catch(
                         function (error:AxiosError) : void{                          
@@ -78,7 +78,7 @@ function showAllCars():void{
     axios.get<ICar[]>("https://webapicar20190326034339.azurewebsites.net/api/cars")
     .then(function (response: AxiosResponse<ICar[]>) : void
     {
-        console.log("Er i then");
+        console.log("are in then");
         console.log(response);
 
         let result: string = "<ol>" 
@@ -93,13 +93,13 @@ function showAllCars():void{
     })
     .catch(
         function (error:AxiosError) : void{
-            console.log("Error I min kode");
+            console.log("Error in the typescript code");
             console.log(error);
 
         }
     )
     
-    console.log("Er i slutningen af showAllCars function");
+    console.log("At the end in the showAllCars function");
 }
 
 
