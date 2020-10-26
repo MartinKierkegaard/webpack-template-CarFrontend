@@ -7,7 +7,7 @@ import { ICar } from "./Icar";
 //url for the rest webservice at Azure
 let carWebUrl: string = "https://webapicar20190326034339.azurewebsites.net/api/cars/";
 
-let ContentElement: HTMLDivElement = <HTMLDivElement> document.getElementById("content");
+let ContentElement: HTMLDivElement = <HTMLDivElement> document.getElementById("carsContent");
 let GetAllCarsButton: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getAllButton");
 
 GetAllCarsButton.addEventListener('click',showAllCars);
@@ -81,14 +81,23 @@ function showAllCars():void{
         console.log("are in then");
         console.log(response);
 
-        let result: string = "<ol>" 
+        // let result: string = "<ol>" 
+         //remove all the li elements one by one
+    while (ContentElement.firstChild) {
+        ContentElement.removeChild(ContentElement.lastChild);
+    }
+   
+
 
         response.data.forEach((car: ICar) => {
-            result += "<li>"+ car.model + " " +car.vendor+ " "+car.price  +"</li>"
-        });
-        result += "</ol>"
+            let newNode:HTMLLIElement = AddLiElement(car.model + " " +car.vendor+ " "+car.price);
+            ContentElement.appendChild(newNode);
 
-        ContentElement.innerHTML= result;
+            // result += "<li>"+ car.model + " " +car.vendor+ " "+car.price  +"</li>"
+        });
+        // result += "</ol>"
+
+        // ContentElement.innerHTML= result;
         
     })
     .catch(
@@ -102,6 +111,16 @@ function showAllCars():void{
     console.log("At the end in the showAllCars function");
 }
 
-
+/**
+ * Returns a new HTMLLIElement with the text specified in the text param
+ * @param text text for the li node
+ */
+function AddLiElement(text:string):HTMLLIElement {
+    let newLi:HTMLLIElement = document.createElement('li');
+    let newTextNode:Text = document.createTextNode(text)
+    newLi.appendChild(newTextNode);
+            // list.appendChild(newLi);
+    return newLi;
+}
 
 // showAllCars();
